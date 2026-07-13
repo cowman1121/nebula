@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F5F0E8;
+--foreground: #1A1A2E;
+--nebula-login-button: #322277;
+--nebula-text: #FBF6EB;
+--nebula-emailpass-placeholder: #9CA3AF;
+--nebula-emailpass-border: #D1D0D8;
+--nebula-hover: #FB7185;
+
+--teacher-card: #F3F0FF;
+--teacher-emailpass-background: #EEE9FF;
+--teacher-emailpass-text: #4B5563;
+--teacher-emailpass-ring: #D1D0D8;
+    
+
+}
+
+
+ @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-urbanist);
+  --color-nebula-login-button: var(--nebula-login-button);
+  --color-nebula-text: var(--nebula-text);
+  --color-nebula-emailpass-placeholder: var(--nebula-emailpass-placeholder);
+  --color-nebula-emailpass-border: var(--nebula-emailpass-border);
+  --color-nebula-hover: var(--nebula-hover);
+  --color-nebula-background: var(--background);
+  --color-teacher-card: var(--teacher-card);
+  --color-teacher-emailpass-background: var(--teacher-emailpass-background);
+  --color-teacher-emailpass-text: var(--teacher-emailpass-text);
+  --color-teacher-emailpass-ring: var(--teacher-emailpass-ring);
+}
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-urbanist), Arial, sans-serif;
+}
+
+.filter-nebula-login-button {
+  filter: invert(13%) sepia(1200%) saturate(1200%) hue-rotate(228deg) brightness(80%);
+}
