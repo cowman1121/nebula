@@ -45,13 +45,13 @@
         <main className="min-h-screen flex items-start justify-center pt-48 overflow-hidden">    
         <div className="flex items-center gap-16">
             <div className="flex flex-col self-start">
-                <h1 className= "flex items-center text-nebula-login-button text-8xl font-black my-8">
+                <h1 className= "flex items-center text-violet text-8xl font-black my-8">
                     <img 
                     src = "sparkle.png"
                     alt = "Nebula Logo"
-                    className="w-24 mr-1 filter-nebula-login-button"
+                    className="w-24 mr-1 filter-violet"
                     />
-                        <span className="inline-flex items-center justify-center bg-nebula-login-button text-background rounded-lg leading-none w-16 h-20 overflow-hidden">
+                        <span className="inline-flex items-center justify-center bg-violet text-background rounded-lg leading-none w-16 h-20 overflow-hidden">
                     N   
                         </span>
                     ebula
@@ -60,7 +60,7 @@
              <div className="bg-nebula-background rounded-2xl p-8  w-120">   
                 <input 
                 id="email"
-                className="w-full bg-foreground px-4 h-12 text-nebula-text mt-6 focus:outline-none rounded-lg focus-within:ring-2  ring-nebula-hover" 
+                className="w-full bg-foreground px-4 h-12 text-cream mt-6 focus:outline-none rounded-lg focus-within:ring-2  ring-coral" 
                 placeholder="E-mail" 
                 type="email"
                 autoComplete='username'
@@ -70,7 +70,7 @@
                  />
                 <input 
                 id="password"
-                className="w-full bg-foreground px-4 h-12 text-nebula-text mt-6 focus:outline-none rounded-lg focus-within:ring-2 ring-nebula-hover" 
+                className="w-full bg-foreground px-4 h-12 text-cream mt-6 focus:outline-none rounded-lg focus-within:ring-2 ring-coral" 
                 placeholder="Password" 
                 type="password"
                 autoComplete='current-password'
@@ -78,7 +78,7 @@
                 onChange={(e) => setPassword(e.target.value)}
                 
                 />
-                    <button onClick={handleLogin} className="w-full rounded-full text-nebula-text text-center text-3xl bg-nebula-login-button hover:bg-nebula-hover py-4 mt-8 cursor-pointer font-black shadow-2xl">
+                    <button onClick={handleLogin} className="w-full rounded-full text-cream text-center text-3xl bg-violet hover:bg-coral py-4 mt-8 cursor-pointer font-black shadow-2xl">
                      Log in
                     </button>
 

@@ -3,16 +3,19 @@
 :root {
   --background: #F5F0E8;
 --foreground: #1A1A2E;
---nebula-login-button: #322277;
---nebula-text: #FBF6EB;
---nebula-emailpass-placeholder: #9CA3AF;
---nebula-emailpass-border: #D1D0D8;
---nebula-hover: #FB7185;
+--violet: #322277;
+--cream: #FBF6EB;
+--gray: #9CA3AF;
+--gray-light: #D1D0D8;
+--coral: #FB7185;
 
---teacher-card: #F3F0FF;
---teacher-emailpass-background: #EEE9FF;
---teacher-emailpass-text: #4B5563;
---teacher-emailpass-ring: #D1D0D8;
+--lavender: #F3F0FF;
+--lavender-deep: #EEE9FF;
+--steel-blue: #6497b1;
+--baby-blue: #b3cde0;
+--blue-gray: #E4E4E7;
+
+
     
 
 }
@@ -22,16 +25,18 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-urbanist);
-  --color-nebula-login-button: var(--nebula-login-button);
-  --color-nebula-text: var(--nebula-text);
-  --color-nebula-emailpass-placeholder: var(--nebula-emailpass-placeholder);
-  --color-nebula-emailpass-border: var(--nebula-emailpass-border);
-  --color-nebula-hover: var(--nebula-hover);
+  --color-violet: var(--violet);
+  --color-cream: var(--cream);
+  --color-gray: var(--gray);
+  --color-gray-light: var(--gray-light);
+  --color-coral: var(--coral);
   --color-nebula-background: var(--background);
-  --color-teacher-card: var(--teacher-card);
-  --color-teacher-emailpass-background: var(--teacher-emailpass-background);
-  --color-teacher-emailpass-text: var(--teacher-emailpass-text);
-  --color-teacher-emailpass-ring: var(--teacher-emailpass-ring);
+  --color-lavender: var(--lavender);
+  --color-lavender-deep: var(--lavender-deep);
+  --color-steel-blue: var(--steel-blue);
+  --color-baby-blue: var(--baby-blue);
+  --color-blue-gray: var(--blue-gray);
+
 }
 
 
@@ -42,6 +47,6 @@ body {
   font-family: var(--font-urbanist), Arial, sans-serif;
 }
 
-.filter-nebula-login-button {
+.filter-violet {
   filter: invert(13%) sepia(1200%) saturate(1200%) hue-rotate(228deg) brightness(80%);
 }
