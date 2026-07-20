@@ -3,7 +3,7 @@ import React, { useState, useEffect} from "react"
 import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { User, Home, Calendar, Mail, Plus, NotepadText } from "lucide-react";
-import {doc, getDoc} from "firebase/firestore";
+import {doc, getDoc, collection, addDoc, serverTimestamp} from "firebase/firestore";
 import{ onAuthStateChanged} from "firebase/auth";
 
 
@@ -50,13 +50,15 @@ const TeacherDashboard = () => {
             <div className="p-2 rounded-full bg-white/20 ring-2">
               <User className="w-6 h-6"/> 
             </div>
-            <span className="">
+      <div className="w-60">
+            <span className={shrinkSidebar ? "" : "hidden" }>
             Name Here
             </span>
        </div>
        
         {/* published class list */}
-        <details className="cursor-pointer py-16">
+       
+        <details className={`cursor-pointer py-16 ${shrinkSidebar ? "" : "hidden"}`}>
           <summary className="px-4 text-3xl">
              Published
           </summary>
@@ -64,8 +66,10 @@ const TeacherDashboard = () => {
               French 101  
             </button>
         </details>
-           
+         
+        
         {/* unpublushed class list */}
+       {shrinkSidebar && (
         <details className="cursor-pointer py-16">
              <summary className="px-4 text-3xl"> 
                 Unpublished
@@ -73,10 +77,14 @@ const TeacherDashboard = () => {
             <button className={(sidebarCSS)}>
              Spanish 101
             </button>
-        </details>        
+        </details> 
+        )} 
+      </div>  
+            
         <button className="flex gap-2 mt-auto font-black mb-4 justify-center cursor-pointer">
            <Plus /> Add Class
         </button>
+        
     </div>
 
     {/* Main Start*/}
