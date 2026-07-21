@@ -2,8 +2,9 @@
 import React, { useState, useEffect} from "react"
 import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import {addClass} from "@/lib/classes";
 import { User, Home, Calendar, Mail, Plus, NotepadText } from "lucide-react";
-import {doc, getDoc, collection, addDoc, serverTimestamp} from "firebase/firestore";
+import {doc, getDoc} from "firebase/firestore";
 import{ onAuthStateChanged} from "firebase/auth";
 
 
@@ -16,8 +17,7 @@ const TeacherDashboard = () => {
   const router = useRouter();
   const divider = "w-px h-4 bg-gray "
   const sidebarCSS = "block w-full pl-8 pr-4 py-2 text-xl whitespace-nowrap hover:bg-white/10 cursor-pointer underline";
-  const sidebarShrink = `flex flex-col bg-steel-blue h-screen transition-all duration-300 overflow-hidden ${
-     shrinkSidebar ? "w-60" : "w-16"}`
+  const sidebarShrink = `flex flex-col bg-steel-blue h-screen transition-all duration-300 overflow-hidden ${shrinkSidebar ? "w-60" : "w-18"}`
 
   
    
@@ -37,6 +37,11 @@ const TeacherDashboard = () => {
     })
     return () => lock();
   }, []);
+  
+  const onAddClass = async () => {
+  const newId = await addClass();
+  router.push(`/teacher/class/${newId}`);
+   };
 
     
   return (
@@ -55,6 +60,7 @@ const TeacherDashboard = () => {
             Name Here
             </span>
        </div>
+    </div>
        
         {/* published class list */}
        
@@ -79,13 +85,14 @@ const TeacherDashboard = () => {
             </button>
         </details> 
         )} 
-      </div>  
+        
             
-        <button className="flex gap-2 mt-auto font-black mb-4 justify-center cursor-pointer">
+        <button 
+        onClick={onAddClass}
+        className={`flex gap-2 mt-auto font-black mb-4 justify-center cursor-pointer ${shrinkSidebar ? "" : "hidden"}`}>
            <Plus /> Add Class
         </button>
-        
-    </div>
+        </div>
 
     {/* Main Start*/}
     <div className="flex-1 bg-cream h-screen flex flex-col">   
@@ -130,9 +137,16 @@ const TeacherDashboard = () => {
         className="px-1 py-2 cursor-pointer hover:bg-white/40 hover:rounded-lg hover:shadow-md hover:-translate-y-0.5 transition-all" 
         title="Assignment Search">
         <Plus className="w-4 h-4"/>
-        </button>
-        
+        </button> 
         </div>
+        
+        <div className="flex-1 p-4 text-black">
+        {activeTab === "home" && <div>Home content here</div>}
+        {activeTab === "inbox" && <div>Inbox content here</div>}
+        {activeTab === "calendar" && <div>Calendar content here</div>}
+        {activeTab === "todo" && <div>To-do content here</div>}
+        </div>
+
     </div>
 
     </main>
