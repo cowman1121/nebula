@@ -2,7 +2,10 @@
 import React, { useState, useEffect} from "react"
 import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-import {addClass} from "@/lib/classes";
+import {addClass, classDoc, subscribeToTeacherClasses} from "@/lib/classes";
+import { getPublishedClasses, getUnpublishedClasses } from "@/lib/classsidebar";
+import { Tab } from "@/lib/tab";
+import { tabRender } from "@/lib/tabRender";
 import { User, Home, Calendar, Mail, Plus, NotepadText } from "lucide-react";
 import {doc, getDoc} from "firebase/firestore";
 import{ onAuthStateChanged} from "firebase/auth";
@@ -13,6 +16,10 @@ import{ onAuthStateChanged} from "firebase/auth";
 const TeacherDashboard = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [shrinkSidebar, setShrinkSidebar] = useState(false);
+  const [classes, setClasses] = useState<classDoc[]>([]);
+  const [openTabs, setOpenTabs] = useState<Tab[]>([]);
+  const published = getPublishedClasses(classes);
+  const unpublished = getUnpublishedClasses(classes);
   const tabStruct = (tab: string) => `px-2 py-2 cursor-pointer ${activeTab === tab ? "bg-cream" : "hover:bg-white/40 hover:rounded-lg hover:shadow-md hover:-translate-y-0.5 transition-all"}`
   const router = useRouter();
   const divider = "w-px h-4 bg-gray "
@@ -35,14 +42,38 @@ const TeacherDashboard = () => {
         return;
       } 
     })
-    return () => lock();
+    return (lock);
   }, []);
+
+  useEffect(() => {
+    const unsubAuth = onAuthStateChanged(auth, function(user)  {
+    if (!user) return;
+
+      const unsub = subscribeToTeacherClasses(user.uid, function (loaded) {
+        setClasses(loaded);
+      console.log("classes: ", loaded)
+      });
+      return (unsub);
+    });
+
+    return (unsubAuth);
+  }, []);
+
+
+
   
-  const onAddClass = async () => {
-  const newId = await addClass();
-  router.push(`/teacher/class/${newId}`);
+  const openClassTab =(c: classDoc, isNew: boolean = false) => {
+  const alreadyOpen = openTabs.some(tab => tab.id === c.id);
+    if (!alreadyOpen){
+      setOpenTabs([...openTabs,  {id: c.id, label: c.name, type: "class", isNew}])
+    }
+    setActiveTab(c.id);
    };
 
+   const onAddClass = async () => {
+    const newClass = await addClass();
+    openClassTab(newClass, true);
+   };
     
   return (
     <main className="flex">
@@ -68,9 +99,11 @@ const TeacherDashboard = () => {
           <summary className="px-4 text-3xl">
              Published
           </summary>
-            <button className={(sidebarCSS)}>
-              French 101  
+            {published.map(c =>
+            <button key={c.id} onClick={() => openClassTab(c)} className={`${sidebarCSS} text-foreground`}>
+              {c.name} 
             </button>
+            )}
         </details>
          
         
@@ -80,9 +113,11 @@ const TeacherDashboard = () => {
              <summary className="px-4 text-3xl"> 
                 Unpublished
              </summary>   
-            <button className={(sidebarCSS)}>
-             Spanish 101
+             {unpublished.map(c => 
+            <button key={c.id} onClick={() => openClassTab(c)} className={`${(sidebarCSS)} text-foreground`}>
+              {c.name}
             </button>
+            )}
         </details> 
         )} 
         
@@ -140,11 +175,8 @@ const TeacherDashboard = () => {
         </button> 
         </div>
         
-        <div className="flex-1 p-4 text-black">
-        {activeTab === "home" && <div>Home content here</div>}
-        {activeTab === "inbox" && <div>Inbox content here</div>}
-        {activeTab === "calendar" && <div>Calendar content here</div>}
-        {activeTab === "todo" && <div>To-do content here</div>}
+        <div className="flex-1 p-4 text-foreground">
+        {tabRender(activeTab, openTabs)}
         </div>
 
     </div>

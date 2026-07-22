@@ -1,35 +1,51 @@
-import {collection, addDoc, serverTimestamp, query, where, onSnapshot, Unsubscribe} from "firebase/firestore";
+import {collection, addDoc, serverTimestamp, query, where, onSnapshot, Unsubscribe, Timestamp} from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 
-
-export type classDoc ={
-id: string;
-name: string;
-teacherID: string;
-published: boolean;
-subject: string;
-templateID: string | null;
-studentsID: string[];
+export type classDoc = {
+  id: string;
+  name: string;
+  teacherID: string;
+  published: boolean;
+  subject: string;
+  templateID: string | null;
+  studentsID: string[];
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 };
 
-export const addClass = async (name:string = "New Class") =>{
- const newClass = await addDoc(collection(db, "classes"), {
+export const addClass = async (name: string = "New Class") => {
+  const teacherID = auth.currentUser?.uid ?? "";
+
+  const baseData = {
     name,
-    teacherId: auth.currentUser?.uid,
+    teacherID,
     published: false,
     subject: "",
-    templateId: null,
-    studentIds: [],
+    templateID: null,
+    studentsID: [],
+  };
+
+  const newDoc = await addDoc(collection(db, "classes"), {
+    ...baseData,
     createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
   });
-  return newClass.id;
+
+  const newClass: classDoc = {
+    id: newDoc.id,
+    ...baseData,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
+  };
+
+  return newClass;
 };
 
 export function subscribeToTeacherClasses(
   teacherId: string,
   callback: (classes: classDoc[]) => void
 ): Unsubscribe {
-  const q = query(collection(db, "classes"), where("teacherId", "==", teacherId));
+  const q = query(collection(db, "classes"), where("teacherID", "==", teacherId));
   return onSnapshot(q, (snapshot) => {
     callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as classDoc)));
   });
