@@ -6,11 +6,13 @@ export const tabRender = (activeTab: string, openTabs: Tab []) => {
         if (activeTab === "inbox") return <div>Inbox content here</div>;
         if (activeTab === "calendar") return <div>Calendar content here</div>;
         if (activeTab === "todo") return <div>To-do content here</div>;
-
-        const openClass = openTabs.find(tab => tab.id === activeTab);
-        if (openClass?.isNew) return <div> New class setup for: {openClass.label}</div>;
-        if (openClass) return <div>Class viewer for: {openClass.label}</div>;
-
+        
+     
+        const openTab = openTabs.find(tab => tab.id === activeTab);
+        if (openTab?.label === "Search Bar") return <div>Search bar coming soon</div>;
+        if (openTab?.isNew) return <div> New class setup for: {openTab.label}</div>;
+        if (openTab) return <div>Class viewer for: {openTab.label}</div>;
+        
         return null;
 
 };
