@@ -215,7 +215,7 @@ const TeacherDashboard = () => {
         </div>
         
         <div className="flex-1 p-4 text-foreground">
-        {tabRender(activeTab, openTabs)}
+        {tabRender(activeTab, openTabs, classes)}
         </div>
 
     </div>
