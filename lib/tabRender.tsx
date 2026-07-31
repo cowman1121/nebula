@@ -1,6 +1,7 @@
 import { Tab } from "@/lib/tab";
 import { classDoc } from "@/lib/classes";
 import { ClassWizard } from "@/lib/newclassWizard";
+import {ClassPage} from "@/lib/classPage"
 
 
 export const tabRender = (activeTab: string, openTabs: Tab [], classes:classDoc[]) => {
@@ -14,8 +15,8 @@ export const tabRender = (activeTab: string, openTabs: Tab [], classes:classDoc[
         if (openTab?.label === "Search Bar") return <div>Search bar coming soon</div>;
         
         const classData = classes.find(c => c.id === activeTab)
-        if (openTab?.isNew && classData) return <ClassWizard classData={classData} />;
-        if (openTab) return <div>Class viewer for: {openTab.label}</div>;
+        if (classData && !classData.setupComplete) return <ClassWizard classData={classData} />;
+        if (classData) return <ClassPage classData={classData} />;
         
         return null;
 

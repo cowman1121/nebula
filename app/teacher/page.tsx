@@ -26,7 +26,16 @@ const TeacherDashboard = () => {
   const sidebarCSS = "block w-full pl-8 pr-4 py-2 text-xl whitespace-nowrap hover:bg-white/10 cursor-pointer underline";
   const sidebarShrink = `flex flex-col bg-steel-blue h-screen transition-all duration-300 overflow-hidden ${shrinkSidebar ? "w-60" : "w-18"}`
 
-  
+  useEffect(() => {
+    setOpenTabs(prev => prev.filter(tab => tab.type !== "class" || classes.some(c => c.id === tab.id)));
+  }, [classes]);
+
+  useEffect(() => {
+    const stillOpen = openTabs.some(tab => tab.id === activeTab);
+    if (!stillOpen && activeTab !== "home" && activeTab !== "inbox" && activeTab !== "calendar" && activeTab !== "todo") {
+    setActiveTab("home");
+   }
+}, [openTabs]);
    
   useEffect(() => {
     const lock = onAuthStateChanged(auth, async (user) =>{
