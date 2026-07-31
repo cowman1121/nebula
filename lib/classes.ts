@@ -11,6 +11,7 @@ export type classDoc = {
   studentsID: string[];
   createdAt: Timestamp;
   updatedAt: Timestamp;
+  setupComplete: boolean;
 };
 
 export const addClass = async (name: string = "New Class") => {
@@ -23,6 +24,7 @@ export const addClass = async (name: string = "New Class") => {
     subject: "",
     templateID: null,
     studentsID: [],
+    setupComplete: false,
   };
 
 
