@@ -2,10 +2,10 @@
 import React, { useState, useEffect} from "react"
 import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-import {addClass, classDoc, subscribeToTeacherClasses} from "@/lib/classes";
-import { getPublishedClasses, getUnpublishedClasses } from "@/lib/classsidebar";
-import { Tab } from "@/lib/tab";
-import { tabRender } from "@/lib/tabRender";
+import {addClass, classDoc, subscribeToTeacherClasses} from "@/lib/ClassFiles/classes";
+import { getPublishedClasses, getUnpublishedClasses } from "@/lib/ClassFiles/classsidebar";
+import { Tab } from "@/lib/TabSystem/tab";
+import { tabRender } from "@/lib/TabSystem/tabRender";
 import { User, Home, CalendarDays, Mail, Plus, NotepadText, X } from "lucide-react";
 import {doc, getDoc} from "firebase/firestore";
 import{ onAuthStateChanged} from "firebase/auth";

@@ -11,6 +11,18 @@ export type fileDoc = {
   uploadedAt: Timestamp;
 };
 
+
+export const fileToPDF = async (fileURL: string, fileName: string) => {
+  const response = await fetch("/api/convert-to-pdf", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ fileURL, fileName }),
+});
+
+const pdfData = await response.arrayBuffer();
+return pdfData;
+};
+
 export const uploadFile = async (file: File, classId: string) => {
   const originalName = file.name;
   const fileType = file.name.split(".").pop() ?? "";

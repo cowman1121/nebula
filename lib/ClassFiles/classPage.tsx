@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react"
-import { classDoc } from "@/lib/classes";
+import { classDoc } from "@/lib/ClassFiles/classes";
+import {FileChooser } from "@/lib/FileProcessing/fileChooser";
 import { School, GraduationCap, BookOpen, ScrollText, Users, MessageSquare, Settings } from "lucide-react";
 
 type ClassNavTab = "home" | "grades" | "modules" | "syllabus" | "roster" | "discussion";
@@ -36,7 +37,10 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
     );
   }
 
-
+    if (classNavTab === "syllabus") return <div className="flex flex-col justify-center items-center underline text-bold text-4xl gap-16">
+      <FileChooser classId={classData.id} onUploaded={(file) => console.log("uploaded:", file)} />
+    </div>;
+  
 
 
 
@@ -55,7 +59,7 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
 
 
 
-    if (classNavTab === "syllabus") return <div>Syllabus content</div>;
+    
 
 
 
@@ -81,7 +85,6 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
     >
   <Settings className="w-5 h-5" />
     </button>
-        <h1></h1>
       <div className="w-56 flex flex-col gap-1 border-r border-gray py-6 px-3">
         {navItems.map(({ id, label, icon: Icon }) => (
           <button

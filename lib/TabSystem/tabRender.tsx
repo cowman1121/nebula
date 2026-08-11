@@ -1,7 +1,7 @@
-import { Tab } from "@/lib/tab";
-import { classDoc } from "@/lib/classes";
-import { ClassWizard } from "@/lib/newclassWizard";
-import {ClassPage} from "@/lib/classPage"
+import { Tab } from "@/lib/Tab System/tab";
+import { classDoc } from "@/lib/ClassFiles/classes";
+import { ClassWizard } from "@/lib/ClassFiles/newclassWizard";
+import {ClassPage} from "@/lib/ClassFiles/classPage"
 
 
 export const tabRender = (activeTab: string, openTabs: Tab [], classes:classDoc[]) => {

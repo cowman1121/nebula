@@ -21,7 +21,6 @@
               try {
                   const userCredential = await signInWithEmailAndPassword(auth, email, password);
                   const uid = userCredential.user.uid;
-      
                   const userDoc = await getDoc(doc(db, "users", uid));
                   if (!userDoc.exists()) {
                       setError("No user found");
@@ -46,7 +45,7 @@
 
 
 
-    //HTML/CSS
+  
     return (
       <main className= "relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{
