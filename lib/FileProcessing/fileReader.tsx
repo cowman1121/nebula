@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { fileDoc} from "@/lib/file"
+import { fileDoc} from "@/lib/FileProcessing/file"
 
 export const docViewer = (file:fileDoc) => {
     if (file.fileType === "pdf" || file.fileType === "doc" || file.fileType === "docx") { 

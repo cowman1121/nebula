@@ -43,6 +43,9 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
   
 
 
+    if (classNavTab === "modules") return <div className="flex flex-col justify-center items-center"> No Modules Found </div>;
+
+
 
     if (classNavTab === "grades") return <div>Grades content</div>;
 
@@ -52,7 +55,7 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
 
 
 
-    if (classNavTab === "modules") return <div>Modules content</div>;
+    
 
 
 

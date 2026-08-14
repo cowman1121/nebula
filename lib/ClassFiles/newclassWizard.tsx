@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react"
-import { updateClass, classDoc } from "./classes"
+import { updateClass, classDoc } from "../ClassFiles/classes"
 
 type NewClassWizard = {
   classData: classDoc;
