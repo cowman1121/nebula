@@ -43,7 +43,9 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
   
 
 
-    if (classNavTab === "modules") return <div className="flex flex-col justify-center items-center"> No Modules Found </div>;
+    if (classNavTab === "modules") return <div className="flex flex-col justify-center items-center gap-2 border-2 border-dashed rounded-xl p-10 max-w-md mx-auto"> 
+     <p className="text-3xl font-semibold text-foreground">No Modules Found</p>
+    <p className="text-4xl font-bold text-center">Click the gear button to add a Unit!</p> </div>;
 
 
 

@@ -1,4 +1,4 @@
-import { Tab } from "@/lib/Tab System/tab";
+import { Tab } from "@/lib/TabSystem/tab";
 import { classDoc } from "@/lib/ClassFiles/classes";
 import { ClassWizard } from "@/lib/ClassFiles/newclassWizard";
 import {ClassPage} from "@/lib/ClassFiles/classPage"
