@@ -1,4 +1,4 @@
-import {collection, addDoc, serverTimestamp, query, where, onSnapshot, Unsubscribe, Timestamp, doc, updateDoc} from "firebase/firestore";
+import {collection, addDoc, serverTimestamp, query, where, onSnapshot, Unsubscribe, Timestamp, doc, updateDoc, deleteDoc} from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 
 export type classDoc = {
@@ -12,6 +12,10 @@ export type classDoc = {
   createdAt: Timestamp;
   updatedAt: Timestamp;
   setupComplete: boolean;
+  layoutConfig: {
+    syllabusSeparate: boolean,
+    resourcesSeparate: boolean,
+  } | null;
 };
 
 export const addClass = async (name: string = "New Class") => {
@@ -25,7 +29,10 @@ export const addClass = async (name: string = "New Class") => {
     templateID: null,
     studentsID: [],
     setupComplete: false,
+    layoutConfig: null,
   };
+
+  
 
 
   const newDoc = await addDoc(collection(db, "classes"), {
@@ -61,4 +68,8 @@ export function subscribeToTeacherClasses(
     callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as classDoc)));
   });
 }
+
+export const deleteClass = async (classId: string) => {
+  await deleteDoc(doc(db, "classes", classId));
+};
 

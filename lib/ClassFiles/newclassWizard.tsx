@@ -21,6 +21,7 @@ export const ClassWizard = ({ classData }: NewClassWizard) => {
   const confirmSubject = async () => {
     const finalSubject = subjectInput === "Other" ? customSubject : subjectInput;
     await updateClass(classData.id, { subject: finalSubject, setupComplete: true });
+    setStep("editor");
   };
 
   if (step === "name") {
@@ -79,5 +80,33 @@ if (step === "subject") {
     </div>
   );
 }    
+if (step === "editor") {
+  const chooseTemplate = async (syllabusSeparate: boolean, resourcesSeparate: boolean) => {
+    await updateClass(classData.id, {
+      layoutConfig: { syllabusSeparate, resourcesSeparate },
+      setupComplete: true,
+    });
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-8">
+      <h2 className="text-center tracking-tight text-foreground text-6xl font-semibold">Choose a layout</h2>
+      <div className="flex gap-6">
+        <button
+          onClick={() => chooseTemplate(false, false)}
+          className="border border-gray rounded-xl p-6 cursor-pointer hover:border-steel-blue transition-all"
+        >
+          Folded into Home
+        </button>
+        <button
+          onClick={() => chooseTemplate(true, true)}
+          className="border border-gray rounded-xl p-6 cursor-pointer hover:border-steel-blue transition-all"
+        >
+          Separate tabs
+        </button>
+      </div>
+    </div>
+  );
+}
   return <div>Next step: {step}</div>;
 };

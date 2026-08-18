@@ -2,9 +2,9 @@
 import React, { useState } from "react"
 import { classDoc } from "@/lib/ClassFiles/classes";
 import {FileChooser } from "@/lib/FileProcessing/fileChooser";
-import { School, GraduationCap, BookOpen, ScrollText, Users, MessageSquare, Settings } from "lucide-react";
+import { School, GraduationCap, BookOpen, ScrollText, Users, Settings } from "lucide-react";
 
-type ClassNavTab = "home" | "grades" | "modules" | "syllabus" | "roster" | "discussion";
+type ClassNavTab = "home" | "grades" | "modules" | "syllabus" | "roster" ;
 
 type ClassPageProps = {
   classData: classDoc;
@@ -17,7 +17,6 @@ export const ClassPage = ({ classData }: ClassPageProps) => {
     { id: "home", label: "Home", icon: School },
     { id: "syllabus", label: "Syllabus", icon: ScrollText },
     { id: "modules", label: "Modules", icon: BookOpen },
-    { id: "discussion", label: "Discussion", icon: MessageSquare },
     { id: "grades", label: "Grades", icon: GraduationCap },
     { id: "roster", label: "Roster", icon: Users },
     

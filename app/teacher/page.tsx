@@ -2,7 +2,7 @@
 import React, { useState, useEffect} from "react"
 import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-import {addClass, classDoc, subscribeToTeacherClasses} from "@/lib/ClassFiles/classes";
+import {addClass, classDoc, subscribeToTeacherClasses, deleteClass} from "@/lib/ClassFiles/classes";
 import { getPublishedClasses, getUnpublishedClasses } from "@/lib/ClassFiles/classsidebar";
 import { Tab } from "@/lib/TabSystem/tab";
 import { tabRender } from "@/lib/TabSystem/tabRender";
@@ -130,6 +130,7 @@ const TeacherDashboard = () => {
             <button key={c.id} onClick={() => openClassTab(c)} className={`${sidebarCSS} text-foreground`}>
               {c.name} 
             </button>
+            
             )}
         </details>
          
@@ -137,13 +138,18 @@ const TeacherDashboard = () => {
         {/* unpublushed class list */}
        {shrinkSidebar && (
         <details className="cursor-pointer py-16">
-             <summary className="px-4 text-3xl"> 
+             <summary className="px-3 py-3 text-3xl"> 
                 Unpublished
              </summary>   
              {unpublished.map(c => 
-            <button key={c.id} onClick={() => openClassTab(c)} className={`${(sidebarCSS)} text-foreground`}>
-              {c.name}
+            <div key={c.id}  className={`${(sidebarCSS)} text-foreground flex items-center justify-between` }>
+            <button onClick={() => openClassTab(c)} className="text-left flex-1">
+              {c.name} 
             </button>
+            <button onClick={(e) => {e.stopPropagation(); deleteClass(c.id)}}>
+                <X className="hover:ring-2 rounded-2xl justify-center"/>
+            </button>
+            </div>
             )}
         </details> 
         )} 
